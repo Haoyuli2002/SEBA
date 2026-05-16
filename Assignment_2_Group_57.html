@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Assignment_2_Group_57.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="decantr--assignment-2">Decantr — Assignment 2</h1>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#personas">Personas</a></li>
+<li><a href="#customer-journeys">Customer Journeys</a>
+<ul>
+<li><a href="#1-wine-enthusiast--alex-chen">Wine Enthusiast — Alex Chen</a></li>
+<li><a href="#2-wine-business-owner--sophie-wagner">Wine Business Owner — Sophie Wagner</a></li>
+</ul>
+</li>
+<li><a href="#uml-class-diagram">UML Class Diagram</a></li>
+</ol>
+<h2 id="personas">Personas</h2>
+<p align="center">
+  <img src="Personas.jpeg" width="85%">
+</p>
+<div class="page-break"></div>
+<h2 id="customer-journeys">Customer Journeys</h2>
+<h3 id="1-wine-enthusiast--alex-chen">1. Wine Enthusiast — Alex Chen</h3>
+<h4 id="step-1-registration">Step 1: Registration</h4>
+<table>
+<thead>
+<tr>
+<th>Mockup</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="customer_mockups/1_Wine_Lover_Registration.png" alt="Registration 1"></td>
+<td>Alex opens the Decantr website and clicks &quot;Sign up.&quot; On the registration page, he selects &quot;Wine Lover&quot; (free). He is taken to a form to fill in his personal details.</td>
+</tr>
+<tr>
+<td><img src="customer_mockups/2_Wine_Lover_Registration_2.png" alt="Registration 2"></td>
+<td>He enters his first name, last name, email, and password. After agreeing to the terms of service, he clicks &quot;Create Account&quot; and is immediately directed to the Explore page.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Frontend:</strong> Registration form with role selection, form validation.</li>
+<li><strong>Backend:</strong> POST <code>/api/auth/register</code> — Creates User with role &quot;taster&quot;. Returns JWT token. <strong>Database: Create</strong> User document.</li>
+</ul>
+<h4 id="step-2-discovering-events">Step 2: Discovering Events</h4>
+<table>
+<thead>
+<tr>
+<th>Mockup</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="customer_mockups/3_Discover_Wine_Event.png" alt="Discover Events"></td>
+<td>The Explore page shows Alex an interactive map with pins marking nearby tasting events, alongside a scrollable list of upcoming events. He applies filters for &quot;This Week&quot; and &quot;Nearby.&quot; He spots &quot;Summer Rosé Tasting&quot; at Weinkultur — €15, 12/20 registered, 4.5 stars.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Frontend:</strong> Map component with event markers, filterable event card list, search bar.</li>
+<li><strong>Backend:</strong> GET <code>/api/events?status=published&amp;location=munich</code> — Returns published events filtered by location and date. <strong>Database: Read</strong> Events, Registrations (count per event).</li>
+</ul>
+<h4 id="step-3-viewing-event-details">Step 3: Viewing Event Details</h4>
+<table>
+<thead>
+<tr>
+<th>Mockup</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="customer_mockups/4_View_Wine_Event.png" alt="Event Details"></td>
+<td>Alex taps the event card and views the full details page: a cover image, event description promising four carefully selected Rosé wines from Provence, what's included (tastings, notes, snacks, sommelier guidance), host info (&quot;Weinkultur&quot; ⭐ 4.7), a location map, and €15 per person with a &quot;Register Now&quot; button.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Frontend:</strong> Event detail page with cover image, structured info, host section, location preview.</li>
+<li><strong>Backend:</strong> GET <code>/api/events/:id</code> — Returns full event data including host business info and wine list. <strong>Database: Read</strong> Event, Business, Wine documents.</li>
+</ul>
+<h4 id="step-4-payment--registration">Step 4: Payment &amp; Registration</h4>
+<table>
+<thead>
+<tr>
+<th>Mockup</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="customer_mockups/5_Book_Wine_Event.png" alt="Book Event"></td>
+<td>Alex clicks &quot;Register Now&quot; and a payment modal appears. He sees an order summary (Summer Rosé Tasting — €15), selects &quot;Credit Card&quot; as payment method, and enters his card details: cardholder name, card number, expiry date, and CVV. A lock icon confirms SSL encryption.</td>
+</tr>
+<tr>
+<td><img src="customer_mockups/6_Payment_Successful.png" alt="Payment Success"></td>
+<td>After a brief &quot;Processing...&quot; animation, a green checkmark confirms &quot;Payment Successful!&quot; The modal shows the amount paid (€15) and gives him two options: &quot;Start Tasting Experience&quot; or &quot;Back to Events.&quot; The event now appears in his My Tastings section.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Frontend:</strong> Payment modal with order summary, card form, processing animation, success confirmation.</li>
+<li><strong>Backend:</strong> POST <code>/api/registrations</code> — Creates Registration document. Integrates with Stripe for payment processing. <strong>Database: Create</strong> Registration (paymentStatus: completed, paymentMethod: credit_card, amountPaid: 15).</li>
+</ul>
+<h4 id="step-5-attending-the-tasting-event">Step 5: Attending the Tasting Event</h4>
+<table>
+<thead>
+<tr>
+<th>Mockup</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="customer_mockups/7_Start_tasting_event.png" alt="Start Tasting"></td>
+<td>On the evening of the event, Alex arrives at Weinkultur and opens the tasting interface. The screen shows the event name, a list of wines to taste, and a progress indicator. He begins his tasting journey through 4 wines.</td>
+</tr>
+<tr>
+<td><img src="customer_mockups/8_Evaluate_wines.png" alt="Evaluate Wines"></td>
+<td>For each wine, Alex records his impressions using a structured form: appearance (color swatch selection), nose/aroma (selectable flavor tags like Citrus, Strawberry, Floral), palate (Dry, Crisp, Light-bodied), overall star rating (1-5), and personal notes. He clicks &quot;Save &amp; Next Wine&quot; to proceed.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Frontend:</strong> Step-by-step tasting form with progress bar, color selector, tag chips, star rating, text area.</li>
+<li><strong>Backend:</strong> POST <code>/api/tasting-notes</code> — Creates a TastingNote document for each wine, linked to user, event, and wine. <strong>Database: Create</strong> TastingNote documents (one per wine per user).</li>
+</ul>
+<h4 id="step-6-post-event-summary">Step 6: Post-Event Summary</h4>
+<table>
+<thead>
+<tr>
+<th>Mockup</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="customer_mockups/9_Tasting_summary.png" alt="Tasting Summary"></td>
+<td>After completing all tastings, Alex receives his personal summary. The wines are revealed with their actual names alongside his ratings and flavor tags. A taste profile insight tells him: &quot;Based on your tastings, you prefer Dry, Fruity, Light-bodied wines.&quot; A banner prompts him to save his favorites to his wine cellar.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Frontend:</strong> Summary view with wine reveal cards, star ratings, taste profile insight, save-to-cellar prompt.</li>
+<li><strong>Backend:</strong> GET <code>/api/users/:id/tasting-summary?eventId=...</code> — Retrieves tasting notes, reveals wine names, computes taste profile. <strong>Database: Read</strong> TastingNotes (by user + event), Wines (names revealed).</li>
+</ul>
+<h4 id="step-7-wine-journal--cellar">Step 7: Wine Journal &amp; Cellar</h4>
+<table>
+<thead>
+<tr>
+<th>Mockup</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="customer_mockups/10_Wine_journal.png" alt="Wine Journal"></td>
+<td>Later that week, Alex opens &quot;My Cellar&quot; and navigates to the &quot;Journal&quot; tab. He sees all wines he's tasted, complete with his ratings, flavor tags, personal notes, and the event where he tasted them. Statistics at the top show total wines tasted (5), average rating (4.4), and 5-star wines (2).</td>
+</tr>
+<tr>
+<td><img src="customer_mockups/11_Wine_Cellar.png" alt="Wine Cellar"></td>
+<td>In the &quot;My Cellar&quot; tab, Alex can view wines he's purchased or saved — with producer info, bottle count, purchase location, and price. This becomes his personal wine collection tracker, growing with each event he attends.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Frontend:</strong> Journal tab with wine cards (rating, tags, notes), Cellar tab with owned bottles, statistics, search/filter.</li>
+<li><strong>Backend:</strong> POST <code>/api/cellar</code> — Creates CellarEntry documents. GET <code>/api/users/:id/cellar</code> — Retrieves all entries. <strong>Database: Create</strong> CellarEntry documents. <strong>Read</strong> CellarEntries + Wines + TastingNotes.</li>
+</ul>
+<hr>
+<h3 id="2-wine-business-owner--sophie-wagner">2. Wine Business Owner — Sophie Wagner</h3>
+<h4 id="step-1-registration--subscription">Step 1: Registration &amp; Subscription</h4>
+<table>
+<thead>
+<tr>
+<th>Mockup</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="business_mockups/1_Choose_roles.png" alt="Choose Role"></td>
+<td>Sophie navigates to the Decantr website and clicks &quot;Sign up.&quot; On the registration page, she is presented with two clear options: &quot;Wine Lover&quot; (free) and &quot;Wine Business&quot; (subscription required). She selects &quot;Wine Business,&quot; which takes her to the next step.</td>
+</tr>
+<tr>
+<td><img src="business_mockups/2_Register_as_business_owner.png" alt="Register"></td>
+<td>She fills in her personal details — first name, last name, and email — along with her business information: &quot;Weinkultur&quot; as the business name and &quot;Wine Bar&quot; as the business type. After setting a password and agreeing to the terms of service, she clicks &quot;Next: Choose Plan →.&quot;</td>
+</tr>
+<tr>
+<td><img src="business_mockups/3_Choose_a_subscription_plan.png" alt="Subscription"></td>
+<td>Sophie is presented with two subscription plans: Basic (€29/mo) and Premium (€59/mo). She selects the Premium plan for unlimited events and advanced analytics. She enters her credit card details and clicks &quot;Subscribe &amp; Create Account.&quot; After payment processing, she is directed to her business dashboard.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Frontend:</strong> Registration form with role-based fields, multi-step flow, plan selection cards, payment form.</li>
+<li><strong>Backend:</strong> POST <code>/api/auth/register</code> — Creates User + Business + Subscription documents. Payment processed via Stripe API. <strong>Database: Create</strong> User, Business, Subscription documents.</li>
+</ul>
+<h4 id="step-2-managing-wine-inventory">Step 2: Managing Wine Inventory</h4>
+<table>
+<thead>
+<tr>
+<th>Mockup</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="business_mockups/12_Manage_wine_inventory.png" alt="Wine Inventory"></td>
+<td>Before creating events, Sophie first builds her wine inventory. She navigates to the &quot;Wines&quot; section in the sidebar and sees her existing collection displayed in a table: wine name (with grape variety), region, type (color-coded badges), stock count, and price. She can search and filter wines.</td>
+</tr>
+<tr>
+<td><img src="business_mockups/13_Add_wine_to_inventory.png" alt="Add Wine"></td>
+<td>Sophie clicks &quot;Add New Wine&quot; to expand her collection. A modal appears where she enters the wine name, type, region, grape variety, stock quantity, and price. She can also edit existing wines or delete ones she no longer carries. This demonstrates full CRUD functionality on her wine inventory.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Frontend:</strong> Data table with search, Add/Edit modal form, Delete with confirmation.</li>
+<li><strong>Backend:</strong> POST <code>/api/wines</code> (Create), GET <code>/api/business/:id/wines</code> (Read), PUT <code>/api/wines/:id</code> (Update), DELETE <code>/api/wines/:id</code> (Delete). <strong>Database:</strong> Full <strong>CRUD</strong> on Wine documents.</li>
+</ul>
+<h4 id="step-3-creating-a-tasting-event">Step 3: Creating a Tasting Event</h4>
+<table>
+<thead>
+<tr>
+<th>Mockup</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="business_mockups/4_Event_Page.png" alt="Events Page"></td>
+<td>Sophie navigates to the &quot;Events&quot; section. She sees her list of past and upcoming events with status badges (Published, Draft, Completed), registration progress bars, and revenue for each. She clicks &quot;Create Event&quot; to start a new one.</td>
+</tr>
+<tr>
+<td><img src="business_mockups/5_Create_an_Event.png" alt="Create Event"></td>
+<td>Sophie fills out the event creation form: event name (&quot;Summer Rosé Tasting&quot;), date (June 14, 2026), time (18:00), location (pre-filled with her bar address), description, event type (&quot;Registration required&quot;), max participants (20), and ticket price (€15). She clicks &quot;Next: Add Wines →.&quot;</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Frontend:</strong> Event list with status badges, Create Event form with date picker, radio buttons, number inputs.</li>
+<li><strong>Backend:</strong> POST <code>/api/events</code> — Creates Event document with status &quot;draft&quot;. <strong>Database: Create</strong> Event document.</li>
+</ul>
+<h4 id="step-4-adding-wines-to-the-event">Step 4: Adding Wines to the Event</h4>
+<table>
+<thead>
+<tr>
+<th>Mockup</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="business_mockups/6_Add_wines_to_the_event.png" alt="Add Wines 1"></td>
+<td>On the wine list management page, Sophie adds wines from her inventory to the tasting event. She sees the current wine list in a table format showing order number, wine name, type, region, and vintage with Edit and Delete action buttons.</td>
+</tr>
+<tr>
+<td><img src="business_mockups/7_Add_wines_to_the_event_2.png" alt="Add Wines 2"></td>
+<td>Sophie uses the &quot;Add Wine&quot; button to open a modal form. She enters the wine name, selects the type (Rosé/Red/White/Sparkling), vintage year, region, and grape variety. Each wine is added to the event's tasting order.</td>
+</tr>
+<tr>
+<td><img src="business_mockups/8_Add_wines_to_the_event_3.png" alt="Add Wines 3"></td>
+<td>She notices an incorrect vintage on one wine and uses the edit button to correct it. She also removes a wine that is no longer available. The table updates in real-time, demonstrating Create, Read, Update, and Delete operations on the event's wine list.</td>
+</tr>
+<tr>
+<td><img src="business_mockups/9_Publish_event.png" alt="Publish"></td>
+<td>Satisfied with her selection, Sophie clicks the green &quot;Publish Event&quot; button. The event status changes from &quot;Draft&quot; to &quot;Published&quot; and becomes immediately visible to all wine enthusiasts on the Explore page.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Frontend:</strong> Wine table with CRUD actions, Add/Edit modal, Publish button.</li>
+<li><strong>Backend:</strong> POST <code>/api/events/:id/wines</code> (Create), PUT <code>/api/wines/:id</code> (Update), DELETE <code>/api/wines/:id</code> (Delete), PUT <code>/api/events/:id</code> (Update status to &quot;published&quot;). <strong>Database:</strong> Full <strong>CRUD</strong> on event Wine documents.</li>
+</ul>
+<h4 id="step-5-reviewing-event-performance--feedback">Step 5: Reviewing Event Performance &amp; Feedback</h4>
+<table>
+<thead>
+<tr>
+<th>Mockup</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="business_mockups/10_Event_performance.png" alt="Event Performance"></td>
+<td>After the event concludes, Sophie returns to her Dashboard. She selects &quot;Summer Rosé Tasting&quot; from the event dropdown to view its performance. She sees key metrics (revenue €270, 18/20 attendees, avg rating 4.2/5), wine satisfaction ratings displayed as star ratings sorted from highest to lowest, and real user feedback with text comments and individual star ratings.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Frontend:</strong> Event selector dropdown, stat cards, star rating list (sorted), user feedback cards with quotes.</li>
+<li><strong>Backend:</strong> GET <code>/api/events/:id/analytics</code> — Aggregates TastingNotes: average ratings per wine, user comments. <strong>Database: Read</strong> TastingNotes (aggregated), Registrations.</li>
+</ul>
+<h4 id="step-6-business-analytics-overview">Step 6: Business Analytics Overview</h4>
+<table>
+<thead>
+<tr>
+<th>Mockup</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="business_mockups/11_Business_Analytitcs.png" alt="Analytics"></td>
+<td>Sophie navigates to the &quot;Analytics&quot; section for a holistic view across all her events. She sees customer retention (64%), new enthusiasts gained (+124), total bottles served (432), a Revenue vs Attendance trend chart over 6 months, and a Popular Wine Types pie chart showing the distribution of preferences (Rosé 45%, White 30%, Red 20%, Sparkling 5%).</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Frontend:</strong> Charts (Recharts: LineChart, PieChart), metric cards with progress indicators.</li>
+<li><strong>Backend:</strong> GET <code>/api/business/:id/analytics</code> — Cross-event aggregation of revenue, attendance, wine type preferences. <strong>Database: Read</strong> Events, TastingNotes, Registrations (historical aggregation).</li>
+</ul>
+<hr>
+<h2 id="uml-class-diagram">UML Class Diagram</h2>
+<p>[INSERT UML CLASS DIAGRAM HERE — 1 full page]</p>
+<p>This UML class diagram represents Decantr's conceptual data model. The central class is <strong>User</strong>, specialized into Wine Enthusiast (B2C) and Business (B2B).</p>
+<p><strong>Business</strong> → owns Business entity → creates Events → features Wines
+<strong>Wine Enthusiast</strong> → creates Registrations (with payment) → records TastingNotes → saves CellarEntries</p>
+<p><strong>Key Enumerations:</strong></p>
+<ul>
+<li><code>UserRole</code>: Taster, Business</li>
+<li><code>EventStatus</code>: Draft, Published, Ongoing, Completed, Cancelled</li>
+<li><code>WineType</code>: Red, White, Rosé, Sparkling, Dessert</li>
+<li><code>BusinessType</code>: Wine Bar, Winery, Event Organizer, Wine Shop</li>
+<li><code>PaymentStatus</code>: Pending, Completed, Failed, Refunded</li>
+<li><code>PaymentMethod</code>: Credit Card, PayPal</li>
+<li><code>SubscriptionTier</code>: Basic, Premium</li>
+<li><code>EventType</code>: Open, Registration Required</li>
+</ul>
+<p><strong>Key Relationships:</strong></p>
+<ul>
+<li>User (Business) owns one Business (1:1)</li>
+<li>Business hosts many Events (1:*)</li>
+<li>Event features many Wines (1:*)</li>
+<li>User (Enthusiast) has many Registrations (1:*)</li>
+<li>Registration linked to one Event (*:1)</li>
+<li>User (Enthusiast) creates many TastingNotes (1:*)</li>
+<li>TastingNote references one Wine and one Event</li>
+<li>User (Enthusiast) has many CellarEntries (1:*)</li>
+<li>CellarEntry references one Wine</li>
+<li>Business has one Subscription (1:0..1)</li>
+</ul>
+
+</body>
+</html>
