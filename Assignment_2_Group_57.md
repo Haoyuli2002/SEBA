@@ -14,7 +14,7 @@
   <img src="Personas.jpeg" width="85%">
 </p>
 
-<div class="page-break"></div>
+<div style="page-break-before: always;"></div>
 
 ## Customer Journeys
 
@@ -167,33 +167,39 @@
 
 ---
 
+<div style="page-break-before: always;"></div>
+
 ## UML Class Diagram
 
-[INSERT UML CLASS DIAGRAM HERE — 1 full page]
+<p align="center">
+  <img src="UML_Diagram.png" width="80%">
+</p>
 
-This UML class diagram represents Decantr's conceptual data model. The central class is **User**, specialized into Wine Enthusiast (B2C) and Business (B2B).
+<div style="font-size: 11px; line-height: 1.4; margin-top: 10px;">
 
-**Business** → owns Business entity → creates Events → features Wines
-**Wine Enthusiast** → creates Registrations (with payment) → records TastingNotes → saves CellarEntries
+<p>This UML class diagram represents Decantr's conceptual data model. The central class is <b>User</b>, specialized into Wine Enthusiast (B2C) and Business Owner (B2B).<br>
+<b>Business Owner</b> → owns Business → creates Events → features Wines &nbsp;|&nbsp; <b>Wine Enthusiast</b> → creates Registrations (with payment) → records TastingNotes → saves CellarEntries</p>
 
-**Key Enumerations:**
-- `UserRole`: Taster, Business
-- `EventStatus`: Draft, Published, Ongoing, Completed, Cancelled
-- `WineType`: Red, White, Rosé, Sparkling, Dessert
-- `BusinessType`: Wine Bar, Winery, Event Organizer, Wine Shop
-- `PaymentStatus`: Pending, Completed, Failed, Refunded
-- `PaymentMethod`: Credit Card, PayPal
-- `SubscriptionTier`: Basic, Premium
-- `EventType`: Open, Registration Required
+<p><b>Key Enumerations:</b> UserRole · EventStatus · WineType · BusinessType · PaymentStatus · PaymentMethod · SubscriptionTier · EventType</p>
 
-**Key Relationships:**
-- User (Business) owns one Business (1:1)
-- Business hosts many Events (1:*)
-- Event features many Wines (1:*)
-- User (Enthusiast) has many Registrations (1:*)
-- Registration linked to one Event (*:1)
-- User (Enthusiast) creates many TastingNotes (1:*)
-- TastingNote references one Wine and one Event
-- User (Enthusiast) has many CellarEntries (1:*)
-- CellarEntry references one Wine
-- Business has one Subscription (1:0..1)
+<p><b>Key Relationships:</b></p>
+<table style="font-size: 11px; width: 100%; border: none;">
+<tr>
+<td style="vertical-align: top; padding-right: 5px;">
+• User (Business) owns one Business (1:1)<br>
+• Business hosts many Events (1:*)<br>
+• Event features many Wines (1:*)<br>
+• User (Enthusiast) has many Registrations (1:*)<br>
+• Registration linked to one Event (*:1)
+</td>
+<td style="vertical-align: top;">
+• User (Enthusiast) creates many TastingNotes (1:*)<br>
+• TastingNote references one Wine and one Event<br>
+• User (Enthusiast) has many CellarEntries (1:*)<br>
+• CellarEntry references one Wine<br>
+• Business has one Subscription (1:0..1)
+</td>
+</tr>
+</table>
+
+</div>
