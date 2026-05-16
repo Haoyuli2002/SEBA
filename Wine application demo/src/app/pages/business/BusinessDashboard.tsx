@@ -32,18 +32,6 @@ export function BusinessDashboard() {
 
         <nav className="flex-1 p-4">
           <Link
-            to="/business"
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-2 transition-colors ${
-              isActive("/business") && location.pathname === "/business"
-                ? "bg-[var(--wine-red-100)] text-[var(--wine-red)]"
-                : "text-gray-700 hover:bg-gray-100"
-            }`}
-          >
-            <LayoutDashboard size={20} />
-            <span className="font-medium">Dashboard</span>
-          </Link>
-
-          <Link
             to="/business/events"
             className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-2 transition-colors ${
               isActive("/business/events")
@@ -65,6 +53,18 @@ export function BusinessDashboard() {
           >
             <Wine size={20} />
             <span className="font-medium">Wines</span>
+          </Link>
+
+          <Link
+            to="/business"
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-2 transition-colors ${
+              isActive("/business") && location.pathname === "/business"
+                ? "bg-[var(--wine-red-100)] text-[var(--wine-red)]"
+                : "text-gray-700 hover:bg-gray-100"
+            }`}
+          >
+            <LayoutDashboard size={20} />
+            <span className="font-medium">Dashboard</span>
           </Link>
 
           <Link
@@ -94,11 +94,11 @@ export function BusinessDashboard() {
 
         <div className="p-4 border-t border-gray-200">
           <Link
-            to="/"
-            className="w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-4 transition-colors text-gray-700 hover:bg-gray-100"
+            to="/login"
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-4 transition-colors text-gray-500 hover:bg-gray-100"
           >
-            <LogOut size={20} className="rotate-180" />
-            <span className="font-medium">Switch to Enthusiast</span>
+            <LogOut size={20} />
+            <span className="font-medium">Sign Out</span>
           </Link>
 
           <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">

@@ -144,16 +144,14 @@ const ownedWines: OwnedWine[] = [
 
 export function Cellar() {
   const { user, journeyWines } = useUser();
-  const isNewUser = user?.isNewUser ?? false;
 
   const [activeTab, setActiveTab] = useState<"journal" | "cellar">("journal");
-  // Journey tab uses context data; Cellar tab uses mock for existing users
-  const [ownedWinesList, setOwnedWinesList] = useState(isNewUser ? [] : ownedWines);
+  const [ownedWinesList, setOwnedWinesList] = useState(ownedWines);
   const [filterType, setFilterType] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Use journey wines from context (dynamically updated)
-  const tastedWinesList = journeyWines;
+  // Always show mock data for demo; also include any dynamically added wines from context
+  const tastedWinesList = journeyWines.length > 0 ? journeyWines : tastedWines;
 
   const wineTypes = ["all", "Rosé", "Red", "White", "Sparkling"];
 

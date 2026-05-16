@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { Plus, Calendar, Clock, MapPin, Search, Filter } from "lucide-react";
+import { useUser } from "../../context/UserContext";
 
 const events = [
   {
@@ -38,6 +39,10 @@ const events = [
 ];
 
 export function EventsManager() {
+  const { user } = useUser();
+  const isNewUser = user?.isNewUser ?? false;
+  const displayEvents = isNewUser ? [] : events;
+
   return (
     <div className="p-8">
       {/* Header */}
@@ -81,8 +86,22 @@ export function EventsManager() {
 
       {/* Events List */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+        {displayEvents.length === 0 ? (
+          <div className="p-12 text-center">
+            <Calendar size={48} className="text-gray-300 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold text-gray-700 mb-2">No events yet</h3>
+            <p className="text-gray-500 mb-6">Create your first tasting event to get started.</p>
+            <Link
+              to="/business/events/create"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--wine-red)] text-white rounded-lg font-semibold hover:bg-[var(--wine-red-dark)] transition-colors"
+            >
+              <Plus size={20} />
+              Create Event
+            </Link>
+          </div>
+        ) : (
         <div className="divide-y divide-gray-100">
-          {events.map((event) => (
+          {displayEvents.map((event) => (
             <div key={event.id} className="p-6 hover:bg-gray-50/50 transition-colors">
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                 <div className="flex-1">
@@ -168,6 +187,7 @@ export function EventsManager() {
             </div>
           ))}
         </div>
+        )}
       </div>
     </div>
   );

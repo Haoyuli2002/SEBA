@@ -1,5 +1,6 @@
 import { BarChart3, TrendingUp, Users, Wine, Download, Calendar } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from "recharts";
+import { useUser } from "../../context/UserContext";
 
 const performanceData = [
   { name: "Jan", attendance: 120, revenue: 1500 },

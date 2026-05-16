@@ -1,78 +1,14 @@
 import { useState } from "react";
 import { Search, MapPin, Calendar, Star } from "lucide-react";
 import { Link } from "react-router";
-
-const events = [
-  {
-    id: "summer-rose",
-    title: "Summer Rosé Tasting",
-    date: "Jun 14, 2026",
-    time: "18:00",
-    venue: "Weinkultur, Schwabing",
-    price: "€15",
-    registered: 12,
-    capacity: 20,
-    rating: 4.5,
-    image: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=400&h=300&fit=crop",
-    description: "Join us for an evening exploring premium Rosé wines from Provence.",
-  },
-  {
-    id: "natural-wine",
-    title: "Natural Wine Wednesday",
-    date: "Jun 11, 2026",
-    time: "19:00",
-    venue: "Vinothek Maxvorstadt",
-    price: "Free",
-    registered: 8,
-    capacity: 15,
-    rating: 4.3,
-    image: "https://images.unsplash.com/photo-1547595628-c61a29f496f0?w=400&h=300&fit=crop",
-    description: "Discover the world of natural and organic wines.",
-  },
-  {
-    id: "blind-tasting",
-    title: "Blind Tasting Challenge",
-    date: "Jun 18, 2026",
-    time: "20:00",
-    venue: "Cork & Barrel",
-    price: "€25",
-    registered: 5,
-    capacity: 12,
-    rating: 4.7,
-    image: "https://images.unsplash.com/photo-1474722883778-792e7990302f?w=400&h=300&fit=crop",
-    description: "Test your palate in this exciting blind tasting competition.",
-  },
-  {
-    id: "italian-reds",
-    title: "Italian Red Wine Journey",
-    date: "Jun 22, 2026",
-    time: "19:30",
-    venue: "Vino Italiano",
-    price: "€20",
-    registered: 15,
-    capacity: 20,
-    rating: 4.6,
-    image: "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=400&h=300&fit=crop",
-    description: "Explore the diverse regions of Italian red wines.",
-  },
-  {
-    id: "champagne-evening",
-    title: "Champagne & Sparkling Wines",
-    date: "Jun 25, 2026",
-    time: "18:30",
-    venue: "Bubbles Bar",
-    price: "€30",
-    registered: 10,
-    capacity: 16,
-    rating: 4.8,
-    image: "https://images.unsplash.com/photo-1547595628-c61a29f496f0?w=400&h=300&fit=crop",
-    description: "Celebrate with premium champagnes and sparkling wines.",
-  },
-];
+import { useEvents } from "../context/EventsContext";
 
 const filters = ["This Week", "Nearby", "Rosé", "Red", "White", "Free", "Under €20"];
 
 export function DiscoverEvents() {
+  const { events } = useEvents();
+  const publishedEvents = events.filter((e) => e.status === "published");
+
   const [activeFilters, setActiveFilters] = useState<string[]>(["This Week", "Nearby"]);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -135,9 +71,9 @@ export function DiscoverEvents() {
                 <div className="text-center z-10">
                   <MapPin size={64} className="text-[var(--wine-red-light)] mx-auto mb-3" />
                   <p className="text-lg font-semibold text-gray-700">Map View</p>
-                  <p className="text-sm text-gray-600">Showing {events.length} events near Munich</p>
+                  <p className="text-sm text-gray-600">Showing {publishedEvents.length} events near Munich</p>
                 </div>
-                {events.map((event, idx) => (
+                {publishedEvents.map((event, idx) => (
                   <div
                     key={event.id}
                     className="absolute bg-[var(--wine-red)] text-white w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold shadow-lg hover:scale-110 transition-transform cursor-pointer"
@@ -155,9 +91,9 @@ export function DiscoverEvents() {
             {/* Events List */}
             <div className="space-y-4">
               <h2 className="text-xl font-semibold text-gray-900 mb-4">
-                {events.length} Events Found
+                {publishedEvents.length} Events Found
               </h2>
-              {events.map((event) => (
+              {publishedEvents.map((event) => (
                 <Link
                   key={event.id}
                   to={`/event/${event.id}`}
@@ -186,7 +122,7 @@ export function DiscoverEvents() {
                       </div>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-4">
-                          <span className="text-lg font-bold text-[var(--wine-red-dark)]">{event.price}</span>
+                          <span className="text-lg font-bold text-[var(--wine-red-dark)]">{event.price === 0 ? "Free" : `€${event.price}`}</span>
                           <span className="text-sm text-gray-500">
                             {event.registered}/{event.capacity} registered
                           </span>

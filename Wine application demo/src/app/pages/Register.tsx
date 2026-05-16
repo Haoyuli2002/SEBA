@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { User, Store, ArrowRight, CheckCircle2 } from "lucide-react";
+import { User, Store, ArrowRight, CheckCircle2, CreditCard, Lock, Check } from "lucide-react";
 import LogoSvg from "../../imports/Logo.svg";
 import { useUser } from "../context/UserContext";
 
@@ -12,6 +12,8 @@ export function Register() {
   const [email, setEmail] = useState("");
   const [businessName, setBusinessName] = useState("");
   const [businessType, setBusinessType] = useState("");
+  const [selectedPlan, setSelectedPlan] = useState<"basic" | "premium">("basic");
+  const [isProcessing, setIsProcessing] = useState(false);
   const navigate = useNavigate();
   const { setUser } = useUser();
 
@@ -20,10 +22,27 @@ export function Register() {
     setStep(2);
   };
 
-  const handleRegister = (e: React.FormEvent) => {
+  const handleDetailsSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Save user data to context
+    if (role === "business") {
+      // Business users go to subscription step
+      setStep(3);
+    } else {
+      // Tasters register directly
+      completeRegistration();
+    }
+  };
+
+  const handleSubscriptionPayment = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsProcessing(true);
+    setTimeout(() => {
+      setIsProcessing(false);
+      completeRegistration();
+    }, 1500);
+  };
+
+  const completeRegistration = () => {
     setUser({
       firstName,
       lastName,
@@ -50,12 +69,14 @@ export function Register() {
           <img src={LogoSvg} alt="Decantr" className="h-20 w-auto" />
         </div>
         <h2 className="text-center text-3xl font-extrabold text-gray-900">
-          {step === 1 ? "Create your account" : "Complete your profile"}
+          {step === 1 ? "Create your account" : step === 2 ? "Complete your profile" : "Choose your plan"}
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600">
           {step === 1
             ? "Choose how you want to use Decantr"
-            : "Fill in your details to get started"}
+            : step === 2
+            ? "Fill in your details to get started"
+            : "Select a subscription to access business features"}
         </p>
       </div>
 
@@ -75,7 +96,8 @@ export function Register() {
                 <p className="text-sm text-gray-600">
                   Discover local tastings, track your notes, and build your digital cellar.
                 </p>
-                <div className="mt-6 flex items-center text-[var(--wine-red)] font-semibold">
+                <p className="mt-2 text-xs text-green-600 font-medium">Free</p>
+                <div className="mt-4 flex items-center text-[var(--wine-red)] font-semibold">
                   Get Started <ArrowRight size={18} className="ml-2" />
                 </div>
               </button>
@@ -92,13 +114,14 @@ export function Register() {
                 <p className="text-sm text-gray-600">
                   Host events, manage wine lists, and gain insights from your customers.
                 </p>
-                <div className="mt-6 flex items-center text-[var(--wine-red)] font-semibold">
+                <p className="mt-2 text-xs text-gray-500 font-medium">Subscription required</p>
+                <div className="mt-4 flex items-center text-[var(--wine-red)] font-semibold">
                   Get Started <ArrowRight size={18} className="ml-2" />
                 </div>
               </button>
             </div>
-          ) : (
-            <form onSubmit={handleRegister} className="space-y-6">
+          ) : step === 2 ? (
+            <form onSubmit={handleDetailsSubmit} className="space-y-6">
               <div className="flex items-center gap-3 p-4 bg-[var(--wine-red-50)] rounded-xl border border-[var(--wine-red-100)] mb-6">
                 <CheckCircle2 className="text-[var(--wine-red)]" />
                 <p className="text-sm text-gray-700 font-medium">
@@ -203,7 +226,106 @@ export function Register() {
                 type="submit"
                 className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-[var(--wine-red)] hover:bg-[var(--wine-red-dark)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--wine-red)] transition-colors"
               >
-                Create Account
+                {role === "business" ? "Next: Choose Plan →" : "Create Account"}
+              </button>
+            </form>
+          ) : (
+            /* Step 3: Subscription Plan + Payment (Business only) */
+            <form onSubmit={handleSubscriptionPayment} className="space-y-6">
+              <button
+                type="button"
+                onClick={() => setStep(2)}
+                className="text-sm text-[var(--wine-red)] hover:underline mb-2"
+              >
+                ← Back to details
+              </button>
+
+              {/* Plan Selection */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-900 mb-3">Select Your Plan</label>
+                <div className="grid grid-cols-2 gap-4">
+                  <button
+                    type="button"
+                    onClick={() => setSelectedPlan("basic")}
+                    className={`p-4 border-2 rounded-xl text-left transition-all ${
+                      selectedPlan === "basic"
+                        ? "border-[var(--wine-red)] bg-[var(--wine-red-50)]"
+                        : "border-gray-200 hover:border-gray-300"
+                    }`}
+                  >
+                    <p className="font-bold text-gray-900">Basic</p>
+                    <p className="text-2xl font-bold text-[var(--wine-red)] mt-1">€29<span className="text-sm text-gray-500 font-normal">/mo</span></p>
+                    <ul className="mt-3 space-y-1 text-xs text-gray-600">
+                      <li className="flex items-center gap-1"><Check size={12} className="text-green-500" /> Up to 5 events/month</li>
+                      <li className="flex items-center gap-1"><Check size={12} className="text-green-500" /> Basic analytics</li>
+                      <li className="flex items-center gap-1"><Check size={12} className="text-green-500" /> Wine list management</li>
+                    </ul>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedPlan("premium")}
+                    className={`p-4 border-2 rounded-xl text-left transition-all relative ${
+                      selectedPlan === "premium"
+                        ? "border-[var(--wine-red)] bg-[var(--wine-red-50)]"
+                        : "border-gray-200 hover:border-gray-300"
+                    }`}
+                  >
+                    <span className="absolute -top-2 right-3 px-2 py-0.5 bg-[var(--wine-red)] text-white text-xs font-bold rounded-full">Popular</span>
+                    <p className="font-bold text-gray-900">Premium</p>
+                    <p className="text-2xl font-bold text-[var(--wine-red)] mt-1">€59<span className="text-sm text-gray-500 font-normal">/mo</span></p>
+                    <ul className="mt-3 space-y-1 text-xs text-gray-600">
+                      <li className="flex items-center gap-1"><Check size={12} className="text-green-500" /> Unlimited events</li>
+                      <li className="flex items-center gap-1"><Check size={12} className="text-green-500" /> Advanced analytics</li>
+                      <li className="flex items-center gap-1"><Check size={12} className="text-green-500" /> Promoted listings</li>
+                    </ul>
+                  </button>
+                </div>
+              </div>
+
+              {/* Payment Details */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-900 mb-3">Payment Details</label>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Cardholder Name</label>
+                    <input type="text" required placeholder={`${firstName} ${lastName}`} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[var(--wine-red)]" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Card Number</label>
+                    <input type="text" required placeholder="4242 4242 4242 4242" maxLength={19} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[var(--wine-red)]" />
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Expiry</label>
+                      <input type="text" required placeholder="MM/YY" maxLength={5} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[var(--wine-red)]" />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">CVV</label>
+                      <input type="text" required placeholder="123" maxLength={4} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[var(--wine-red)]" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Summary */}
+              <div className="bg-gray-50 rounded-lg p-4">
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-gray-600">{selectedPlan === "basic" ? "Basic" : "Premium"} Plan (monthly)</span>
+                  <span className="font-bold text-gray-900">€{selectedPlan === "basic" ? "29" : "59"}/mo</span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 text-xs text-gray-500">
+                <Lock size={14} />
+                <span>Payment secured with SSL encryption. Cancel anytime.</span>
+              </div>
+
+              <button
+                type="submit"
+                disabled={isProcessing}
+                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-[var(--wine-red)] hover:bg-[var(--wine-red-dark)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--wine-red)] transition-colors disabled:opacity-60"
+              >
+                {isProcessing ? "Processing payment..." : `Subscribe & Create Account — €${selectedPlan === "basic" ? "29" : "59"}/mo`}
               </button>
             </form>
           )}

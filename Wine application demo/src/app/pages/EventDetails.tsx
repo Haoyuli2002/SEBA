@@ -2,30 +2,7 @@ import { useState } from "react";
 import { useParams, useNavigate, Link } from "react-router";
 import { ArrowLeft, Calendar, MapPin, Users, Star, Check, CreditCard, Lock } from "lucide-react";
 import { useUser } from "../context/UserContext";
-
-const eventData: Record<string, any> = {
-  "summer-rose": {
-    title: "Summer Rosé Tasting",
-    date: "June 14, 2026",
-    time: "18:00–20:30",
-    venue: "Weinkultur, Schwabing",
-    address: "Leopoldstraße 45, Munich",
-    price: 15,
-    registered: 12,
-    capacity: 20,
-    rating: 4.7,
-    host: "Weinkultur",
-    image: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800&h=400&fit=crop",
-    description:
-      "Join us for an evening exploring premium Rosé wines from Provence. Taste 4 carefully selected wines, learn about the region, and enjoy light snacks paired with each wine.",
-    included: [
-      "4 premium wine tastings",
-      "Tasting sheet and notes",
-      "Light snacks and bread",
-      "Expert sommelier guidance",
-    ],
-  },
-};
+import { useEvents } from "../context/EventsContext";
 
 export function EventDetails() {
   const { eventId } = useParams();
@@ -34,7 +11,8 @@ export function EventDetails() {
   const [paymentMethod, setPaymentMethod] = useState<"card" | "paypal">("card");
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const event = eventData[eventId || ""];
+  const { getEventById } = useEvents();
+  const event = getEventById(eventId || "");
 
   if (!event) {
     return <div className="p-4">Event not found</div>;

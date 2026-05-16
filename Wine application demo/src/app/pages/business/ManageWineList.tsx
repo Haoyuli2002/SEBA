@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { ArrowLeft, Plus, Edit2, Trash2, X } from "lucide-react";
+import { useEvents } from "../../context/EventsContext";
+import { useUser } from "../../context/UserContext";
 
 interface Wine {
   id: string;
@@ -54,7 +56,9 @@ const initialWines: Wine[] = [
 export function ManageWineList() {
   const navigate = useNavigate();
   const { eventId } = useParams();
-  const [wines, setWines] = useState<Wine[]>(initialWines);
+  const { user } = useUser();
+  const isNewUser = user?.isNewUser ?? false;
+  const [wines, setWines] = useState<Wine[]>(isNewUser ? [] : initialWines);
   const [showAddModal, setShowAddModal] = useState(false);
   const [editingWine, setEditingWine] = useState<Wine | null>(null);
   const [formData, setFormData] = useState({
@@ -114,8 +118,40 @@ export function ManageWineList() {
     setShowAddModal(false);
   };
 
+  const { addEvent } = useEvents();
+
   const handlePublish = () => {
-    alert("Event published successfully!");
+    // Create a new event and add to global context
+    const newEvent = {
+      id: `event-${Date.now()}`,
+      title: "Summer Rosé Tasting",
+      date: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
+      time: "18:00",
+      venue: user?.businessName ? `${user.businessName}, Schwabing` : "Weinkultur, Schwabing",
+      address: "Munich, Germany",
+      price: 15,
+      registered: 0,
+      capacity: 20,
+      rating: 0,
+      host: user?.businessName || "Weinkultur",
+      image: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=400&h=300&fit=crop",
+      description: "A new tasting event featuring carefully selected wines.",
+      included: ["Wine tastings", "Tasting notes", "Light snacks"],
+      eventType: "registration" as const,
+      status: "published" as const,
+      wines: wines.map((w) => ({
+        id: w.id,
+        name: w.name,
+        type: w.type,
+        region: w.region,
+        vintage: w.vintage,
+        grapeVariety: w.grapeVariety,
+        order: w.order,
+      })),
+    };
+
+    addEvent(newEvent);
+    alert("Event published successfully! It is now visible to all users on the Explore page.");
     navigate("/business");
   };
 
